@@ -12,7 +12,9 @@ def top_ten(subreddit):
         return
 
     url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
-    headers = {'User-Agent': 'python:api_advanced:v1.0'}
+    headers = {
+        'User-Agent': 'linux:api_advanced_project:v1.0.0 (by /u/student_dev)'
+    }
     params = {'limit': 10}
 
     try:
@@ -27,14 +29,14 @@ def top_ten(subreddit):
             print("None")
             return
 
-        data = response.json()
-        posts = data.get('data', {}).get('children', [])
+        data = response.json().get('data', {})
+        children = data.get('children', [])
 
-        if not posts:
+        if not children:
             print("None")
             return
 
-        for post in posts:
+        for post in children:
             print(post.get('data', {}).get('title'))
     except Exception:
         print("None")
