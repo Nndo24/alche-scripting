@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Contains top_ten function to query Reddit API for hot post titles.
+Queries the Reddit API and prints the titles of the first 10 hot posts.
 """
 import requests
 
@@ -12,11 +12,7 @@ def top_ten(subreddit):
         return
 
     url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
-                      'AppleWebKit/537.36 (KHTML, like Gecko) '
-                      'Chrome/111.0.0.0 Safari/537.36'
-    }
+    headers = {'User-Agent': 'MyRedditScript/1.0 (by /u/student)'}
     params = {'limit': 10}
 
     try:
@@ -26,6 +22,7 @@ def top_ten(subreddit):
             params=params,
             allow_redirects=False
         )
+
         if response.status_code != 200:
             print("None")
             return
